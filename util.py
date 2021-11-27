@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from statsmodels.tsa.stattools import adfuller
 from sklearn import metrics
 
@@ -77,8 +78,27 @@ def report_metrics(y_true, y_pred, print_output):
     
     if print_output:
         print(f"Explained Variance: {ev:,.4f}")
-        print(f"MAE: {mae:,.0f}")
-        print(f"RMSE: {mse:,.0f}")
+        print(f"MAE: {mae:,.4f}")
+        print(f"RMSE: {mse:,.4f}")
         print(f"r^2: {r2:,.4f}")
     
     return [ev, mae, mse, r2]
+
+
+def plot_results(df, preds, logged):
+    fig, ax = plt.subplots(figsize=(10,6))
+    
+    if logged:
+        # Training data
+        df.loc[df.future == 0, 'ride_count'].plot(color='blue', label='actual train', ax=ax)
+        # Predictions
+        np.exp(preds).plot(color='green', label='predicted test', ax=ax)
+        # Testing data
+        df.loc[df.future == 1, 'ride_count'].plot(color='blue', label='actual train', ax=ax, alpha = 0.5)
+    else:
+        # Training data
+        df.loc[df.future == 0, 'ride_count'].plot(color='blue', label='actual train', ax=ax)
+        # Predictions
+        preds.plot(color='green', label='predicted test', ax=ax)
+        # Testing data
+        df.loc[df.future == 1, 'ride_count'].plot(color='blue', label='actual train', ax=ax, alpha = 0.5)
