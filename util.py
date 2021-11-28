@@ -86,6 +86,17 @@ def report_metrics(y_true, y_pred, print_output):
 
 
 def plot_results(df, preds, logged):
+
+    '''
+    Plots results of a time series model, specifically: train actuals, test actuals, and predicted results.
+    Inputs:
+        - Full, original dataframe (this will include both train and test data)
+        - Predictions from holdout Test set
+        - logged: boolean for whether the logged values were modeled. If True, values are unlogged before plotting
+    Returns:
+        - Plot of full time series broken out by Train actuals, Test actuals, and Test preds
+    '''
+
     fig, ax = plt.subplots(figsize=(10,6))
     
     if logged:
