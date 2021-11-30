@@ -7,6 +7,7 @@ processed/
 neighborhoods/
 nyc_geo_data/
 clean_data/
+covid_data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
