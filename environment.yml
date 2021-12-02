@@ -20,7 +20,7 @@ dependencies:
   - cryptography=36.0.0=py38h56c4533_0
   - cycler=0.11.0=pyhd8ed1ab_0
   - cython=0.29.24=py38ha048514_1
-  - dbus=1.13.6=h2f22bb5_0
+  - dbus=1.13.6=h0c50699_1
   - debugpy=1.5.1=py38ha048514_0
   - decorator=5.1.0=pyhd8ed1ab_0
   - defusedxml=0.7.1=pyhd8ed1ab_0
@@ -28,9 +28,8 @@ dependencies:
   - expat=2.4.1=he49afe7_0
   - fonttools=4.28.2=py38h96a0964_0
   - freetype=2.10.4=h4cff582_1
-  - geos=3.10.1=he49afe7_1
   - gettext=0.19.8.1=haf92f58_1004
-  - glib=2.58.3=py38h338c551_1004
+  - glib=2.66.3=h519c658_0
   - icu=68.2=he49afe7_0
   - idna=3.1=pyhd3deb0d_0
   - importlib-metadata=4.8.2=py38h50d1736_0
@@ -66,6 +65,7 @@ dependencies:
   - libffi=3.2.1=hb1e8313_1007
   - libgfortran=5.0.0=9_3_0_h6c81a4c_23
   - libgfortran5=9.3.0=h6c81a4c_23
+  - libglib=2.66.3=h2575888_0
   - libiconv=1.16=haf1e3a3_0
   - liblapack=3.9.0=12_osx64_openblas
   - libllvm11=11.1.0=hd011deb_2
@@ -132,13 +132,13 @@ dependencies:
   - qtconsole=5.2.1=pyhd8ed1ab_0
   - qtpy=1.11.2=pyhd8ed1ab_0
   - readline=8.1=h05e3726_0
-  - scikit-learn=1.0.1=py38h37f3bb3_2
+  - scikit-learn=0.23.2=py38h740a60c_3
   - scipy=1.7.3=py38hd329d04_0
   - send2trash=1.8.0=pyhd8ed1ab_0
   - setuptools=59.4.0=py38h50d1736_0
   - six=1.16.0=pyh6c4a22f_0
   - sqlite=3.37.0=h23a322b_0
-  - statsmodels=0.13.1=py38hbe852b5_0
+  - statsmodels=0.13.0=py38hca72f7f_0
   - terminado=0.12.1=py38h50d1736_1
   - testpath=0.5.0=pyhd8ed1ab_0
   - threadpoolctl=3.0.0=pyh8a188c0_0
