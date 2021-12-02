@@ -23,14 +23,14 @@ The main folder contains all the scripts and support needed to run the analysis 
 ## Accessing Data
 
 * Ride-level data is provided by Citibike at the following ULR (https://s3.amazonaws.com/tripdata/index.html)
-* It contains 130mm_ individual rides from the past 8 years with standard fields including origin station, destination station, station coordinates, start time, stop time, user type (member or guest), bike ID, and user gender
-* All monthly CSV files should be saved in a folder at the main directory level called "ridership_raw"
+* It contains 130mm+ individual rides from the past 8 years with standard fields including origin station, destination station, station coordinates, start time, stop time, user type (member or guest), bike ID, and user gender
+* Clicking on the zips will download the monthly ridership CSV. All monthly CSV files should be saved in a folder at the main directory level called "ridership_raw"
 * Important notes:
   * CSV files that begin with JC (Jersey City) should be ignored
   * Aggregated files (e.g., 201307-201402-citibike-tripdata.zip) should be ignored
   * The model is only trained on monthly data through October 2021. While my intent is to keep this updated as new data comes out, data should only be saved down up through the date listed in this README
-* NYC geo_json data can be downloaded here (https://data.cityofnewyork.us/City-Government/2010-Neighborhood-Tabulation-Areas-NTAs-/cpf4-rkhq), just make sure to download as a GeoJSON file type.
-* COVID recovery-related data can be found and downloaded here (https://www.investopedia.com/new-york-city-nyc-economic-recovery-index-5072042)
+* NYC geo_json data can be downloaded here (https://data.cityofnewyork.us/City-Government/2010-Neighborhood-Tabulation-Areas-NTAs-/cpf4-rkhq), just make sure to download as a GeoJSON file type. This should be saved in a folder in the main directory called "nyc_geo_data"
+* COVID recovery-related data can be found and downloaded here (https://www.investopedia.com/new-york-city-nyc-economic-recovery-index-5072042). The csv should be saved in a folder in the main directory named "covid_data".
 
 ## Data Cleaning
 
@@ -49,6 +49,16 @@ A key next step for this model (hopefully to be incorporated shortly) is to add 
 
 ## Results
 
-The final overall model achieved Explained Variance of 85% and an R2 of 83%, even when training on COVID data (which will potentially skew results). Neighborhood level models had a range of accuracies, but were generally quite accurate.
+The final overall model achieved Explained Variance and R2 of 87%, even when training on COVID data (which will potentially skew results). Neighborhood level models had a range of accuracies, but were generally quite accurate.
 
-I project that Citibike will finish 2021 with a total of 27mm rides taken, a record. A predict they will break this record in 2022 with 31.3mm rides taken.
+I project that Citibike will finish 2021 with a total of 27mm rides taken, a record. A predict they will break this record in 2022 with 36mm rides taken. 
+
+The top 5 neighborhoods in terms of overall ride growth are all grouped around Prospect Park in Brooklyn: Cemetery, Bushwich South, Park Slope, Carroll Gardens / Red Hook, and North Side. These are all neighborhoods where Citibike has recently expanded in the past several years, and the model expects them to continue to experience very rapid growth.
+
+These are also the neighborhoods that are expected to have the highest % change in ridership as well, all above 75% growth. In addition, Long Island City in Queens makes this list.
+
+## Conclusion / Next Steps
+
+I was able to build a time series model that performed very well on the holdout data. The main downside of this model is that it produces an aggressive 2022 forecast. While this feels appropriate given the trends in the data, it's unclear whether Citibike has the capacity to meet this demand. After a record breaking 2021, which Cibitike has already said has put strains on the system (https://ride.citibikenyc.com/blog/ridershiprecords), an additional 9mm rides in 2022 may be a tall order. On the other hand, Citibike continues to add stations and capacity, so maybe the system could absord this growth after all.
+
+As a next step, I will incorporate COVID data into the training set to be able to build sensivity analyses for ridership given several potential lockdown scenarios.
