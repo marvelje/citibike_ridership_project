@@ -3,34 +3,25 @@ Author: Jeff Marvel
 
 ## Overview
 
-Citibike, NYC's bikeshare program owned and operated by Lyft, has become massively popular. With over 1,000 stations in almost every borough (sorry Staton Island) plus downtown Jersey City, Citibike has become an indispensable part of NYC's transportation infrastructure. Thousands of people rely on Citibike for their daily commuting, moving around their neighborhood, or helping bridge any gaps left by traditional city transportation infrastructure (subway, buses, etc).
+Citibike, NYC's bikeshare program owned and operated by Lyft, has become massively popular. With over 1,000 stations in almost every borough (sorry Staton Island) plus downtown Jersey City, Citibike has become an indispensable part of NYC's transportation infrastructure. The NYC sponsored [feasibility study](https://www1.nyc.gov/assets/planning/download/pdf/plans/transportation/bike_share_complete.pdf) for Citibike's launch cites how NYC is an ideal location for a bikeshare program given its population density. Bikeshare programs can offer transportation solutions within a matter of months as opposed to years (or even decades) for alternatives such as bus lines or subways. Among the benefits anticipated by the study (which performed an exhaustive review of existing bikeshare programs) are increased trasnportation options for NYC commuters, residents, and tourists, better health outcomes, and pollution / carbon reduction reduction. Bikesharing was expected to add a vital link and supplement to existing transportation options (buses, subways, etc). 
 
-While the city-wide lockdown in March of 2020 for the COVID-19 pandemic resulted in a sharp decrease in Citibike usage, ridership has more than bounced back in 2021 and is on pace for a record-breaking year. With two months still to go, 2021 ridership has already topped 24 million rides, breaking the previous record of 21 million from 2019. Given it's growth in popularity, which shows no signs of slowing, it's important to be able to accurately forecast ridership for the system overall, and also for each neighborhood in NYC.
+Another NYC sponsored [study](https://www1.nyc.gov/html/dot/html/bicyclists/bike-ridership-safety.shtml) argues that bikeshare programs lead to materially improved safety for all cyclists, given increased visibility of cyclists on the street (drivers are more acclimated to seeing cyclists), and improved bicycle infrastructure. After 135mm rides taken since launch, there have only been two Citibike related deaths, a rate that's significantly better than death / injury rates for motor vechiles.
 
-For this project, my main goals are to build an accurate forecast for 2022 expected ridership overall, and by NYC neighborhood.
+The growth in ridership over the last 8 years have proven many of the anticipated benefits of the system. Ridership continues to set records: with two months to go in 2021, rides have already topped 24 million, up from the previous record of 21mm in 2019 (ridership in 2020 suffered a decrease related to the COVID-19 pandemic). At the time of this [writing](https://ride.citibikenyc.com/blog/100million) for Citibke's 100 millionth ride, the program was estimate to have reduced carbon emissions by 97mm pounds. Given it's growth in popularity, which shows no signs of slowing, it's important to be able to accurately forecast ridership for the system overall, to help business planning meet this massive growth in demand.
 
-## Navigating the Repository
-
-The main folder contains all the scripts and support needed to run the analysis from end to end.
-* environment.yml contains the libraries and versions used for this project
-* util.py contains functions for processing, testing, and evaluating models that are re-used throughout
-* There are jupyter notebooks each for (1) reading in / processing data (2) EDA and (3) modeling. Notebooks should be run in the following order:
-  * (1) citibike_data_import.ipynb
-  * (2) citibike_eda.ipynb
-  * (3) citibike_modeling.ipynb
-* The "notebooks" folder contains backup sometimes referenced in the main folder for grid searches or other extra analyses that didn't make the final notebook cut.
+For this project, my main goals are to build an accurate forecast for 2022 expected ridership overall and by NYC neighborhood.
 
 ## Accessing Data
 
-* Ride-level data is provided by Citibike at the following ULR (https://s3.amazonaws.com/tripdata/index.html)
+* Ride-level data is provided by Citibike [here](https://s3.amazonaws.com/tripdata/index.html)
 * It contains 130mm+ individual rides from the past 8 years with standard fields including origin station, destination station, station coordinates, start time, stop time, user type (member or guest), bike ID, and user gender
 * Clicking on the zips will download the monthly ridership CSV. All monthly CSV files should be saved in a folder at the main directory level called "ridership_raw"
 * Important notes:
   * CSV files that begin with JC (Jersey City) should be ignored
   * Aggregated files (e.g., 201307-201402-citibike-tripdata.zip) should be ignored
   * The model is only trained on monthly data through October 2021. While my intent is to keep this updated as new data comes out, data should only be saved down up through the date listed in this README
-* NYC geo_json data can be downloaded here (https://data.cityofnewyork.us/City-Government/2010-Neighborhood-Tabulation-Areas-NTAs-/cpf4-rkhq), just make sure to download as a GeoJSON file type. This should be saved in a folder in the main directory called "nyc_geo_data"
-* COVID recovery-related data can be found and downloaded here (https://www.investopedia.com/new-york-city-nyc-economic-recovery-index-5072042). The csv should be saved in a folder in the main directory named "covid_data".
+* NYC geo_json data can be downloaded [here](https://data.cityofnewyork.us/City-Government/2010-Neighborhood-Tabulation-Areas-NTAs-/cpf4-rkhq), just make sure to download as a GeoJSON file type. This should be saved in a folder in the main directory called "nyc_geo_data"
+* COVID recovery-related data can be found and downloaded [here](https://www.investopedia.com/new-york-city-nyc-economic-recovery-index-5072042). The csv should be saved in a folder in the main directory named "covid_data".
 
 ## Data Cleaning
 
@@ -59,6 +50,17 @@ These are also the neighborhoods that are expected to have the highest % change 
 
 ## Conclusion / Next Steps
 
-I was able to build a time series model that performed very well on the holdout data. The main downside of this model is that it produces an aggressive 2022 forecast. While this feels appropriate given the trends in the data, it's unclear whether Citibike has the capacity to meet this demand. After a record breaking 2021, which Cibitike has already said has put strains on the system (https://ride.citibikenyc.com/blog/ridershiprecords), an additional 9mm rides in 2022 may be a tall order. On the other hand, Citibike continues to add stations and capacity, so maybe the system could absord this growth after all.
+I was able to build a time series model that performed very well on the holdout data. The main downside of this model is that it produces an aggressive 2022 forecast. While this feels appropriate given the trends in the data, it's unclear whether Citibike has the capacity to meet this demand. After a record breaking 2021, which Cibitike has already [said has put strains on the system](https://ride.citibikenyc.com/blog/ridershiprecords), an additional 9mm rides in 2022 may be a tall order. On the other hand, Citibike continues to add stations and capacity, so maybe the system could absord this growth after all. Citibike should focus on aggressively building bike inventory and increasing the number of stations available, particularly in high growth neighborhoods cited previously.
 
-As a next step, I will incorporate COVID data into the training set to be able to build sensivity analyses for ridership given several potential lockdown scenarios.
+As a main next step, I will incorporate COVID data into the training set to be able to build sensivity analyses for ridership given several potential lockdown scenarios.
+
+## Navigating the Repository
+
+The main folder contains all the scripts and support needed to run the analysis from end to end.
+* environment.yml contains the libraries and versions used for this project
+* util.py contains functions for processing, testing, and evaluating models that are re-used throughout
+* There are jupyter notebooks each for (1) reading in / processing data (2) EDA and (3) modeling. Notebooks should be run in the following order:
+  * (1) citibike_data_import.ipynb
+  * (2) citibike_eda.ipynb
+  * (3) citibike_modeling.ipynb
+* The "notebooks" folder contains backup sometimes referenced in the main folder for grid searches or other extra analyses that didn't make the final notebook cut.
