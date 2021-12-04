@@ -9,6 +9,7 @@ nyc_geo_data/
 clean_data/
 covid_data/
 results/
+covid_results/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
