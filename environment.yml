@@ -153,7 +153,6 @@ dependencies:
   - pillow=8.4.0=py38hee640a0_0
   - pip=21.3.1=pyhd8ed1ab_0
   - pixman=0.38.0=h01d97ff_1003
-  - plotly=5.4.0=pyhd8ed1ab_0
   - pmdarima=1.8.4=py38h96a0964_1
   - poppler=0.81.0=h2ef9dbd_1
   - poppler-data=0.4.11=hd8ed1ab_0
@@ -191,7 +190,6 @@ dependencies:
   - seaborn-base=0.11.2=pyhd8ed1ab_0
   - send2trash=1.8.0=pyhd8ed1ab_0
   - setuptools=59.4.0=py38h50d1736_0
-  - shapely=1.7.1=py38h9250791_0
   - six=1.16.0=pyh6c4a22f_0
   - snuggs=1.4.7=py_0
   - sqlite=3.37.0=h23a322b_0
@@ -229,5 +227,6 @@ dependencies:
     - pyqtchart==5.12
     - pyqtwebengine==5.12.1
     - rasterio==1.2.10
+    - shapely==1.8.0
     - sklearn==0.0
 prefix: /Users/jeffreymarvel/opt/anaconda3/envs/citibike
