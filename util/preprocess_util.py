@@ -4,6 +4,9 @@ import geopandas as gpd
 import json
 import numpy as np
 
+# Load NYC map
+nycmap = json.load(open('./nyc_geo_data/2010 Neighborhood Tabulation Areas (NTAs).geojson'))
+
 def pre_process(df):
     
     '''
@@ -93,3 +96,40 @@ def borough_json(point):
         if polygon.contains(point):
             return feature['properties']['boro_name']
             continue
+
+# Function to return the neighborhood name given lat / long from geopy's reverse geocoding
+
+def get_neighborhood(lat, long):
+    '''
+    Accepts lat / long coordinates and returns the name of the neighborhood using reverse geocoding
+    Where the neighborhood doesn't exist, fill in these values with np.nan
+    '''
+    # Instantiate geolocator object
+    geolocator = Nominatim(user_agent='citi_bike_share_analysis')
+    
+    # Format lat and long to pass to reverse geolocator
+    loc_string = str(lat) + ', ' + str(long)
+    location = geolocator.reverse(loc_string)
+    
+    # Pull the neighborhood. If no neighborhood listed, then fill with null
+    try:
+        neighborhood = location.raw['address']['neighbourhood']
+    except KeyError:
+        neighborhood = np.nan
+
+    # Use this if needed to make sure the function is actually working as intended
+#     print(neighborhood)
+    
+    return neighborhood
+
+# Define function for rounding the station ID
+
+def convert_station(station):
+    '''
+    Convert station ID to a round number
+    Leave non-numeric station IDs as they are
+    '''
+    try:
+        return round(float(station))
+    except ValueError:
+        return station
