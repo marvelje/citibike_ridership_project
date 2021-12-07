@@ -9,7 +9,13 @@ Another NYC sponsored [study](https://www1.nyc.gov/html/dot/html/bicyclists/bike
 
 The growth in ridership over the last 8 years have proven many of the anticipated benefits of the system. Ridership continues to set records: with two months to go in 2021, rides have already topped 24 million, up from the previous record of 21mm in 2019 (ridership in 2020 suffered a decrease related to the COVID-19 pandemic). At the time of this [writing](https://ride.citibikenyc.com/blog/100million) for Citibke's 100 millionth ride, the program was estimate to have reduced carbon emissions by 97mm pounds. Given it's growth in popularity, which shows no signs of slowing, it's important to be able to accurately forecast ridership for the system overall, to help business planning meet this massive growth in demand.
 
-For this project, my main goals are to build an accurate forecast for 2022 expected ridership overall and by NYC neighborhood.
+## Project Goals
+
+There are two main goals for this project:
+* Predict overall ridership levels for 2022 (including total rides and peak ridership)
+* Predict neighborhood-level ridership totals for 2022 (total growth and percent growth)
+
+The output of this model can be used to ensure sufficient system capacity to meet this demand, and plan for additional stations in high growth neighborhoods.
 
 ## Accessing Data
 
@@ -52,7 +58,11 @@ I did incorporate COVID controls as an additional step. Using the NYC recovery i
 
 I was able to build a time series model that performed very well on the holdout data. The main downside of this model is that it produces an aggressive 2022 forecast. While this feels appropriate given the trends in the data, it's unclear whether Citibike has the capacity to meet this demand. After a record breaking 2021, which Cibitike has already [said has put strains on the system](https://ride.citibikenyc.com/blog/ridershiprecords), an additional 7mm rides in 2022 may be a tall order. On the other hand, Citibike continues to add stations and capacity, so maybe the system could absord this growth after all. Citibike should focus on aggressively building bike inventory and increasing the number of stations available, particularly in high growth neighborhoods cited previously.
 
-As a main next step, I want to further tune the neighborhood models by incorporating controls for COVID. I'd also like to explore more granular Citibike data, including looking at various commuting windows. 
+The fasest growing neighborhoods are projected to be in Brooklyn, around Park Slope, potentially reflecting the changing commuting / traveling dynamics post-COVID. Citibike should consider building additional stations / capacity to support growth in these neighborhoods.
+
+Next steps:
+* I want to further tune the neighborhood models by incorporating controls for COVID. There's room to improve the EV of these models. 
+* I'd also like to explore more granular versions of the Citibike data, including looking at intra-day time periods and shorter-term projections. This can be used to build models that describe daily commuting and general use patterns, and can help inform more tactical, daily planning / decisions.
 
 ## Navigating the Repository
 ```
