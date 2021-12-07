@@ -3,7 +3,7 @@ Author: Jeff Marvel
 
 ## Overview
 
-Citibike, NYC's bikeshare program owned and operated by Lyft, has become massively popular. With over 1,000 stations in almost every borough (sorry Staton Island) plus downtown Jersey City, Citibike has become an indispensable part of NYC's transportation infrastructure. The NYC sponsored [feasibility study](https://www1.nyc.gov/assets/planning/download/pdf/plans/transportation/bike_share_complete.pdf) for Citibike's launch cites how NYC is an ideal location for a bikeshare program given its population density. Bikeshare programs can offer transportation solutions within a matter of months as opposed to years (or even decades) for alternatives such as bus lines or subways. Among the benefits anticipated by the study (which performed an exhaustive review of existing bikeshare programs) are increased trasnportation options for NYC commuters, residents, and tourists, better health outcomes, and pollution / carbon reduction reduction. Bikesharing was expected to add a vital link and supplement to existing transportation options (buses, subways, etc). 
+Citibike, NYC's bikeshare program owned and operated by Lyft, has become massively popular. With over 1,000 stations in almost every borough (sorry Staton Island) plus downtown Jersey City, Citibike has become an indispensable part of NYC's transportation infrastructure. The NYC sponsored [feasibility study](https://www1.nyc.gov/assets/planning/download/pdf/plans/transportation/bike_share_complete.pdf) for Citibike's launch cites how NYC is an ideal location for a bikeshare program given its population density. Bikeshare programs can offer transportation solutions within a matter of months as opposed to years (or even decades) for alternatives such as bus lines or subways. Among the benefits anticipated by the study (which performed an exhaustive review of existing bikeshare programs) are increased trasnportation options for NYC commuters, residents, and tourists, better health outcomes, and pollution / carbon reduction. Bikesharing was expected to add a vital link and supplement to existing transportation options (buses, subways, etc). 
 
 Another NYC sponsored [study](https://www1.nyc.gov/html/dot/html/bicyclists/bike-ridership-safety.shtml) argues that bikeshare programs lead to materially improved safety for all cyclists, given increased visibility of cyclists on the street (drivers are more acclimated to seeing cyclists), and improved bicycle infrastructure. After 135mm rides taken since launch, there have only been two Citibike related deaths, a rate that's significantly better than death / injury rates for motor vechiles.
 
@@ -40,27 +40,40 @@ A key next step for this model (hopefully to be incorporated shortly) is to add 
 
 ## Results
 
-The final overall model achieved Explained Variance and R2 of 87%, even when training on COVID data (which will potentially skew results). Neighborhood level models had a range of accuracies, but were generally quite accurate.
+The final overall model achieved Explained Variance and R2 of 83%, even when training on COVID data (which will potentially skew results). Neighborhood level models had a range of accuracies, but over 2/3 achieved Explained Variance scores greater than 50%.
 
-I project that Citibike will finish 2021 with a total of 27mm rides taken, a record. A predict they will break this record in 2022 with 36mm rides taken. 
+I project that Citibike will finish 2021 with a total of 27mm rides taken, a record. This record is forecast to be broken in 2022 with 34mm rides taken. 
 
-The top 5 neighborhoods in terms of overall ride growth are all grouped around Prospect Park in Brooklyn: Cemetery, Bushwich South, Park Slope, Carroll Gardens / Red Hook, and North Side. These are all neighborhoods where Citibike has recently expanded in the past several years, and the model expects them to continue to experience very rapid growth.
+The neighborhoods expected to have the highest growth in total ridership are all in Midtown Manhattan, which isn't surprising given how much growth they've experienced recently. The highest percent growth neighborhoods are potentially more interesting. The fastest growing neighborhoods are all near Prospect Park in Brooklyn, including Sunset Park, Park Slope / Gowanus, and Prospect heights.
 
-These are also the neighborhoods that are expected to have the highest % change in ridership as well, all above 75% growth. In addition, Long Island City in Queens makes this list.
+I did incorporate COVID controls as an additional step. Using the NYC recovery index (referenced earlier), I built several lockdown scenarios. A mild lockdown to start 2022 could reduce peak summer ridership by 14% while a Severe Lockdown (similar to March 2020) could reduce peak ridership by 21%.
 
 ## Conclusion / Next Steps
 
-I was able to build a time series model that performed very well on the holdout data. The main downside of this model is that it produces an aggressive 2022 forecast. While this feels appropriate given the trends in the data, it's unclear whether Citibike has the capacity to meet this demand. After a record breaking 2021, which Cibitike has already [said has put strains on the system](https://ride.citibikenyc.com/blog/ridershiprecords), an additional 9mm rides in 2022 may be a tall order. On the other hand, Citibike continues to add stations and capacity, so maybe the system could absord this growth after all. Citibike should focus on aggressively building bike inventory and increasing the number of stations available, particularly in high growth neighborhoods cited previously.
+I was able to build a time series model that performed very well on the holdout data. The main downside of this model is that it produces an aggressive 2022 forecast. While this feels appropriate given the trends in the data, it's unclear whether Citibike has the capacity to meet this demand. After a record breaking 2021, which Cibitike has already [said has put strains on the system](https://ride.citibikenyc.com/blog/ridershiprecords), an additional 7mm rides in 2022 may be a tall order. On the other hand, Citibike continues to add stations and capacity, so maybe the system could absord this growth after all. Citibike should focus on aggressively building bike inventory and increasing the number of stations available, particularly in high growth neighborhoods cited previously.
 
-As a main next step, I will incorporate COVID data into the training set to be able to build sensivity analyses for ridership given several potential lockdown scenarios.
+As a main next step, I want to further tune the neighborhood models by incorporating controls for COVID. I'd also like to explore more granular Citibike data, including looking at various commuting windows. 
 
 ## Navigating the Repository
-
-The main folder contains all the scripts and support needed to run the analysis from end to end.
-* environment.yml contains the libraries and versions used for this project
-* util.py contains functions for processing, testing, and evaluating models that are re-used throughout
-* There are jupyter notebooks each for (1) reading in / processing data (2) EDA and (3) modeling. Notebooks should be run in the following order:
-  * (1) citibike_data_import.ipynb
-  * (2) citibike_eda.ipynb
-  * (3) citibike_modeling.ipynb
-* The "notebooks" folder contains backup sometimes referenced in the main folder for grid searches or other extra analyses that didn't make the final notebook cut.
+```
+├── support_notebooks                        <- Additional backup referenced for the main analyses (e.g., grid searches, other modeling iterations)
+│   ├── citibike_arima.ipynb                 <- Overall modeling iterations
+│   ├── citibike_arima_neighborhood.ipynb    <- Neighborhood-level modeling iterations
+│   ├── citibike_data_consolidation.ipynb    <- Consolidating the processed data
+│   ├── citibike_data_import.ipynb           <- Raw data import and processing
+│   ├── citibike_sarimax.ipynb               <- SARIMAX model incorporating COVID independent variables
+│   └── util.py                              <- Util file containing functions for these support notebooks
+│
+├── util                                     <- Contains notebook-specific utility files / scripts
+│   ├── __init__.py                          <- Requisite empty init py file
+│   ├── eda_util.py                          <- Functions used in EDA
+│   ├── modeling_util.py                     <- Functions used in modeling prep / evaluation
+│   └── preprocess_util.py                   <- Functions used in reading / processing data
+│
+├── .gitignore                               <- Standard python gitignore file with additional data / MAC specific ignore commands
+├── README.md                                <- Project summary, including instructions for accessing and processing the data
+├── citibike_data_import.ipynb               <- Script to read in and process the raw ridership files
+├── citibike_eda.ipynb                       <- Script to perform EDA, including visualizations on the overall and neighborhood-level data
+├── citibike_modeling.ipynb                  <- Main modeling notebook, includes main iterations for overall model and neighborhood models
+└── environment.yml                          <- Environment file containing all libraries and versions to run this project
+```
