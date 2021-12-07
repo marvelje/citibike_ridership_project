@@ -1,13 +1,23 @@
 # Citibike Ridership Prediction
 Author: Jeff Marvel
 
-## Overview
+## Overview and Business Problem
 
-Citibike, NYC's bikeshare program owned and operated by Lyft, has become massively popular. With over 1,000 stations in almost every borough (sorry Staton Island) plus downtown Jersey City, Citibike has become an indispensable part of NYC's transportation infrastructure. The NYC sponsored [feasibility study](https://www1.nyc.gov/assets/planning/download/pdf/plans/transportation/bike_share_complete.pdf) for Citibike's launch cites how NYC is an ideal location for a bikeshare program given its population density. Bikeshare programs can offer transportation solutions within a matter of months as opposed to years (or even decades) for alternatives such as bus lines or subways. Among the benefits anticipated by the study (which performed an exhaustive review of existing bikeshare programs) are increased trasnportation options for NYC commuters, residents, and tourists, better health outcomes, and pollution / carbon reduction. Bikesharing was expected to add a vital link and supplement to existing transportation options (buses, subways, etc). 
+Citibike, NYC's bikeshare program owned and operated by Lyft, has become massively popular. With over 1,000 stations in almost every borough (sorry Staton Island) plus downtown Jersey City, Citibike has become an indispensable part of NYC's transportation infrastructure. The NYC sponsored [feasibility study](https://www1.nyc.gov/assets/planning/download/pdf/plans/transportation/bike_share_complete.pdf) for Citibike's launch cites how NYC is an ideal location for a bikeshare program given its population density. Bikeshare programs offer transportation solutions that can be deployed within a matter of months as opposed to years (or even decades) for alternatives such as bus lines or subways. Among the benefits anticipated by the study (which performed an exhaustive review of existing bikeshare programs) are increased trasnportation options for NYC commuters, residents, and tourists, better health outcomes, and pollution / carbon reduction.
 
-Another NYC sponsored [study](https://www1.nyc.gov/html/dot/html/bicyclists/bike-ridership-safety.shtml) argues that bikeshare programs lead to materially improved safety for all cyclists, given increased visibility of cyclists on the street (drivers are more acclimated to seeing cyclists), and improved bicycle infrastructure. After 135mm rides taken since launch, there have only been two Citibike related deaths, a rate that's significantly better than death / injury rates for motor vechiles.
+Another NYC sponsored [study](https://www1.nyc.gov/html/dot/html/bicyclists/bike-ridership-safety.shtml) argues that bikeshare programs lead to materially improved safety for all cyclists, given increased visibility of cyclists on the street (drivers are more acclimated to seeing cyclists), and improved bicycle infrastructure. After 135mm rides taken since launch, there have only been two Citibike related deaths. Also, at the time of this [writing](https://ride.citibikenyc.com/blog/100million) for Citibike's 100 millionth ride, the program was estimate to have reduced carbon emissions by 97mm pounds. 
 
-The growth in ridership over the last 8 years have proven many of the anticipated benefits of the system. Ridership continues to set records: with two months to go in 2021, rides have already topped 24 million, up from the previous record of 21mm in 2019 (ridership in 2020 suffered a decrease related to the COVID-19 pandemic). At the time of this [writing](https://ride.citibikenyc.com/blog/100million) for Citibke's 100 millionth ride, the program was estimate to have reduced carbon emissions by 97mm pounds. Given it's growth in popularity, which shows no signs of slowing, it's important to be able to accurately forecast ridership for the system overall, to help business planning meet this massive growth in demand.
+The growth in ridership over the last 8 years has proven many of the anticipated benefits of the system. Ridership continues to set records: with two months to go in 2021, rides have already topped 24 million, up from the previous record of 21mm in 2019 (ridership in 2020 suffered a decrease related to the COVID-19 pandemic). This growth has started to cause strains on the system, per [this](https://ride.citibikenyc.com/blog/ridershiprecords) Citibike blog post celebrating ridership records this year. Given its continued growth and its many documented benefits, it's important to be able to accurately forecast ridership for the system to help Citibike successfully meet this demand.
+
+
+## Previous Research
+
+Given that Citibike freely publishes their ridership data, it's no surprise that other people have tackled this forecasting challenge. Additionally, there is extensive literature on bike share programs more generally as their popularity has soared. Inspiration for this project include:
+* A [Kaggle](https://www.kaggle.com/c/bike-sharing-demand) competition for predicting bike share demand in Washington DC
+* [This](https://towardsdatascience.com/analysis-and-prediction-of-citi-bike-usage-in-the-unpredictable-2020-3401da26881b) thorough blog post forecasting Citibike ridership using linear regression
+* A [research paper](https://nacto.org/wp-content/uploads/2015/07/2012_Rixey_Station-Level-Forecasting-of-Bike-Sharing-Ridership.pdf) on key exogenous factors that drive bike share ridership
+
+I will differentiate my project by training on the most recent Citibike data using SARIMAX time series modeling techniques, as well as exploring controls for the effects of the COVID-19 pandemic on ridership.
 
 ## Project Goals
 
@@ -46,7 +56,7 @@ A key next step for this model (hopefully to be incorporated shortly) is to add 
 
 ## Results
 
-The final overall model achieved Explained Variance and R2 of 83%, even when training on COVID data (which will potentially skew results). Neighborhood level models had a range of accuracies, but over 2/3 achieved Explained Variance scores greater than 50%.
+The final overall model achieved Explained Variance and R2 of 83%, even when training on COVID data (which will potentially skew results). Neighborhood level models had a range of accuracies, but over 2/3 achieved Explained Variance scores greater than 50%. In other words, the overall model predictions could explain ~83% of the change in ridership of the holdout test set.
 
 I project that Citibike will finish 2021 with a total of 27mm rides taken, a record. This record is forecast to be broken in 2022 with 34mm rides taken. 
 
@@ -56,12 +66,10 @@ I did incorporate COVID controls as an additional step. Using the NYC recovery i
 
 ## Conclusion / Next Steps
 
-I was able to build a time series model that performed very well on the holdout data. The main downside of this model is that it produces an aggressive 2022 forecast. While this feels appropriate given the trends in the data, it's unclear whether Citibike has the capacity to meet this demand. After a record breaking 2021, which Cibitike has already [said has put strains on the system](https://ride.citibikenyc.com/blog/ridershiprecords), an additional 7mm rides in 2022 may be a tall order. On the other hand, Citibike continues to add stations and capacity, so maybe the system could absord this growth after all. Citibike should focus on aggressively building bike inventory and increasing the number of stations available, particularly in high growth neighborhoods cited previously.
-
-The fasest growing neighborhoods are projected to be in Brooklyn, around Park Slope, potentially reflecting the changing commuting / traveling dynamics post-COVID. Citibike should consider building additional stations / capacity to support growth in these neighborhoods.
+I was able to build a time series model that performed very well on the holdout data. The main downside of this model is that it produces an aggressive 2022 forecast. While this feels appropriate given the trends in the data, it's unclear whether Citibike has the capacity to meet this demand. As mentioned in the introduction, ridership at current levels is causing strains on the system. An additional 7mm rides in 2022 may be a tall order. On the other hand, Citibike continues to add stations and capacity, so maybe the system could absord this growth after all. Citibike should focus on aggressively building bike inventory and increasing the number of stations available, particularly in the high growth neighborhoods cited previously.
 
 Next steps:
-* I want to further tune the neighborhood models by incorporating controls for COVID. There's room to improve the EV of these models. 
+* I want to further tune the neighborhood models by incorporating controls for COVID. There's definitely room to improve the EV of these models. 
 * I'd also like to explore more granular versions of the Citibike data, including looking at intra-day time periods and shorter-term projections. This can be used to build models that describe daily commuting and general use patterns, and can help inform more tactical, daily planning / decisions.
 
 ## Navigating the Repository
