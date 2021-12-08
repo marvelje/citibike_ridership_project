@@ -92,12 +92,12 @@ def neighborhood_grid_search(pdq, seasonal_pdq, neighborhood, df, df_grid_search
 
     for param in pdq:
         for param_seasonal in seasonal_pdq: 
-            mod = SARIMAX(train['ride_count_log'], order=param, seasonal_order=param_seasonal).fit(maxiter=1000)
+            mod = SARIMAX(train['ride_count_log'], order=param, seasonal_order=param_seasonal).fit(maxiter=1000, disp=False)
             
             forecast = mod.forecast(steps = len(test))
             # Even though the model is trained on logged data, we want to optimize the EV
             # on the unlogged version as we're trying to explain actual ridership
-            ev = metrics.explained_variance_score(np.exp(test['ride_count']), np.exp(forecast))
+            ev = metrics.explained_variance_score(test['ride_count'], np.exp(forecast))
 
             if ev > best_ev:
                 best_ev = ev
