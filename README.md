@@ -72,6 +72,10 @@ Next steps:
 * I want to further tune the neighborhood models by incorporating controls for COVID. There's definitely room to improve the EV of these models. 
 * I'd also like to explore more granular versions of the Citibike data, including looking at intra-day time periods and shorter-term projections. This can be used to build models that describe daily commuting and general use patterns, and can help inform more tactical, daily planning / decisions.
 
+## Presentation
+
+[Link](https://docs.google.com/presentation/d/13zbN0vIrv5ntjbLLEWoC_8idAvvEPVyu-EL1Tdty66o/edit?usp=sharing) to final presentation
+
 ## Navigating the Repository
 ```
 ├── support_notebooks                        <- Additional backup referenced for the main analyses (e.g., grid searches, other modeling iterations)
