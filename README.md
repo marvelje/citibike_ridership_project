@@ -10,14 +10,6 @@ Another NYC sponsored [study](https://www1.nyc.gov/html/dot/html/bicyclists/bike
 The growth in ridership over the last 8 years has proven many of the anticipated benefits of the system. Ridership continues to set records: with two months to go in 2021, rides have already topped 24 million, up from the previous record of 21mm in 2019 (ridership in 2020 suffered a decrease related to the COVID-19 pandemic). This growth has started to cause strains on the system, per [this](https://ride.citibikenyc.com/blog/ridershiprecords) Citibike blog post celebrating ridership records this year. Given its continued growth and its many documented benefits, it's important to be able to accurately forecast ridership for the system to help Citibike successfully meet this demand.
 
 
-## Previous Research
-
-Given that Citibike freely publishes their ridership data, it's no surprise that other people have tackled this forecasting challenge. Additionally, there is extensive literature on bike share programs more generally as their popularity has soared. Inspiration for this project include:
-* A [Kaggle](https://www.kaggle.com/c/bike-sharing-demand) competition for predicting bike share demand in Washington DC
-* [This](https://towardsdatascience.com/analysis-and-prediction-of-citi-bike-usage-in-the-unpredictable-2020-3401da26881b) thorough blog post forecasting Citibike ridership using linear regression
-* A [research paper](https://nacto.org/wp-content/uploads/2015/07/2012_Rixey_Station-Level-Forecasting-of-Bike-Sharing-Ridership.pdf) on key exogenous factors that drive bike share ridership
-
-I will differentiate my project by training on the most recent Citibike data using SARIMAX time series modeling techniques, as well as exploring controls for the effects of the COVID-19 pandemic on ridership.
 
 ## Project Goals
 
@@ -58,9 +50,23 @@ A key next step for this model (hopefully to be incorporated shortly) is to add 
 
 The final overall model achieved Explained Variance and R2 of 83%, even when training on COVID data (which will potentially skew results). Neighborhood level models had a range of accuracies, but over 2/3 achieved Explained Variance scores greater than 50%. In other words, the overall model predictions could explain ~83% of the change in ridership of the holdout test set.
 
-I project that Citibike will finish 2021 with a total of 27mm rides taken, a record. This record is forecast to be broken in 2022 with 34mm rides taken. 
+Model Performance vs. hold out test set
+![image](https://user-images.githubusercontent.com/81099027/146101376-db48775c-5e66-4613-9d7d-14654f3b88fd.png)
+
+The final overall model achieved Explained Variance and R2 of 83%, even when training on COVID data (which will potentially skew results). Neighborhood level models had a range of accuracies, but over 2/3 achieved Explained Variance scores greater than 50%. In other words, the overall model predictions could explain ~83% of the change in ridership of the holdout test set.
+
+I project that Citibike will finish 2021 with a total of 27mm rides taken, a record. This record is forecast to be broken in 2022 with 34mm rides taken.
+
+Weekly 2022 Overall Ridership Projection
+
+![image](https://user-images.githubusercontent.com/81099027/146101697-e40a1722-46b8-47e0-8379-05fb0e9a4a23.png)
+
 
 The neighborhoods expected to have the highest growth in total ridership are all in Midtown Manhattan, which isn't surprising given how much growth they've experienced recently. The highest percent growth neighborhoods are potentially more interesting. The fastest growing neighborhoods are all near Prospect Park in Brooklyn, including Sunset Park, Park Slope / Gowanus, and Prospect heights.
+
+Projected % growth in total rides by neighborhood
+
+![image](https://user-images.githubusercontent.com/81099027/146101517-096259d4-8937-4d25-a1fc-595cd54a6774.png)
 
 I did incorporate COVID controls as an additional step. Using the NYC recovery index (referenced earlier), I built several lockdown scenarios. A mild lockdown to start 2022 could reduce peak summer ridership by 14% while a Severe Lockdown (similar to March 2020) could reduce peak ridership by 21%.
 
@@ -99,3 +105,12 @@ Next steps:
 ├── citibike_modeling.ipynb                  <- Main modeling notebook, includes main iterations for overall model and neighborhood models
 └── environment.yml                          <- Environment file containing all libraries and versions to run this project
 ```
+
+## Previous Research
+
+Given that Citibike freely publishes their ridership data, it's no surprise that other people have tackled this forecasting challenge. Additionally, there is extensive literature on bike share programs more generally as their popularity has soared. Inspiration for this project include:
+* A [Kaggle](https://www.kaggle.com/c/bike-sharing-demand) competition for predicting bike share demand in Washington DC
+* [This](https://towardsdatascience.com/analysis-and-prediction-of-citi-bike-usage-in-the-unpredictable-2020-3401da26881b) thorough blog post forecasting Citibike ridership using linear regression
+* A [research paper](https://nacto.org/wp-content/uploads/2015/07/2012_Rixey_Station-Level-Forecasting-of-Bike-Sharing-Ridership.pdf) on key exogenous factors that drive bike share ridership
+
+I've differentiated my project by training on the most recent Citibike data using SARIMAX time series modeling techniques, as well as exploring controls for the effects of the COVID-19 pandemic on ridership.
