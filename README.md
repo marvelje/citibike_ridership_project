@@ -23,11 +23,10 @@ The output of this model can be used to ensure sufficient system capacity to mee
 
 * Ride-level data is provided by Citibike [here](https://s3.amazonaws.com/tripdata/index.html)
 * It contains 130mm+ individual rides from the past 8 years with standard fields including origin station, destination station, station coordinates, start time, stop time, user type (member or guest), bike ID, and user gender
-* Clicking on the zips will download the monthly ridership CSV. All monthly CSV files should be saved in a folder at the main directory level called "ridership_raw"
-* Important notes:
-  * CSV files that begin with JC (Jersey City) should be ignored
-  * Aggregated files (e.g., 201307-201402-citibike-tripdata.zip) should be ignored
-  * The model is only trained on monthly data through October 2021. While my intent is to keep this updated as new data comes out, data should only be saved down up through the date listed in this README
+* Running the script "citibike_data_craping.ipynb" will create a folder called ridership_raw and read in / save down each monthly CSV file in that folder. This currently supports data through October 2021, although the script contains instructions for updating the code to read in additional data. Important notes:
+  * CSV files that begin with JC (Jersey City) are ignored
+  * Aggregated files (e.g., 201307-201402-citibike-tripdata.zip) are ignored
+  * The model is only trained on monthly data through October 2021
 * NYC geo_json data can be downloaded [here](https://data.cityofnewyork.us/City-Government/2010-Neighborhood-Tabulation-Areas-NTAs-/cpf4-rkhq), just make sure to download as a GeoJSON file type. This should be saved in a folder in the main directory called "nyc_geo_data"
 * COVID recovery-related data can be found and downloaded [here](https://www.investopedia.com/new-york-city-nyc-economic-recovery-index-5072042). The csv should be saved in a folder in the main directory named "covid_data".
 
